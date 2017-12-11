@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+.todolist li label {
+  margin-left: 0;
+}
+
+.logout {
+   cursor: pointer;
+   font-weight: bold;
+}
+.logout:hover {
+    text-decoration: underline;
+}

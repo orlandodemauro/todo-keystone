@@ -1,0 +1,11 @@
+<section class="todoapp">
+  <app-todo-list-header (add)="onAddTodo($event)"></app-todo-list-header>
+  <app-todo-list [todos]="todos" (toggleComplete)="onToggleTodoComplete($event)"
+                 (remove)="onRemoveTodo($event)"></app-todo-list>
+  <app-todo-list-footer
+    [todos]="todos"
+    [activeTasks]="activeTasks"
+    [path]="path"
+    (clear)="clearCompleted($event)"></app-todo-list-footer>
+</section>
+Hi {{username}}. Click <button class="logout" (click)="logout()">logout</button> to close your session.

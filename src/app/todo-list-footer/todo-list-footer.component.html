@@ -1,0 +1,15 @@
+<footer class="footer">
+  <span *ngIf="activeTasks > 0" class="todo-count"><strong>{{activeTasks}}</strong> {{activeTasks == 1 ? 'item' : 'items'}} left</span>
+  <ul class="filters">
+    <li>
+      <a [routerLink]="['/all']" [class.selected]="path === 'all'">All</a>
+    </li>
+    <li>
+      <a [routerLink]="['/active']" [class.selected]="path === 'active'">Active</a>
+    </li>
+    <li>
+      <a [routerLink]="['/completed']" [class.selected]="path === 'completed'">Completed</a>
+    </li>
+  </ul>
+  <button class="clear-completed" (click)="clearCompleted()">Clear completed</button>
+</footer>
