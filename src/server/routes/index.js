@@ -20,28 +20,21 @@
 
 var keystone = require('keystone');
 var middleware = require('./middleware');
-var importRoutes = keystone.importer(__dirname);
+//var importRoutes = keystone.importer(__dirname);
 
 
 keystone.pre('routes', middleware.initErrorHandlers);
 
 // Import Route Controllers
-var routes = {
-	api: importRoutes('./api'),
-};
+// var routes = {
+// };
 
 // Setup Route Bindings
 exports = module.exports = function (app) {
 	
 	//app.get('/', routes.api.index);
 	
-	app.get('/todo', keystone.middleware.api, routes.api.todo.list);
-	app.get('/todo/:id', keystone.middleware.api, routes.api.todo.get);
-	app.post('/todo', keystone.middleware.api, routes.api.todo.create);
-	app.put('/todo/:id', keystone.middleware.api, routes.api.todo.update);
-	app.delete('/todo/:id', keystone.middleware.api, routes.api.todo.remove);
-
-
+	app.use('/', keystone.middleware.api, require('./api'));
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 
