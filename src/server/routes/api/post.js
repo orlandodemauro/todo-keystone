@@ -19,11 +19,10 @@ var getAllPosts = function(req, res) {
 }
 
 /**
- * Get Galley by title
+ * Get Post by title
  */
 var getPost = function(req, res) {
   Post.model.findOne({
-    state: req.body.state || 'published',
     slug: req.params.post,
   }).exec(function(err, item) {
 

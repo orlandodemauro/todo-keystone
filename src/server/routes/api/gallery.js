@@ -19,7 +19,7 @@ var getAllGalleries = function(req, res) {
 }
 
 /**
- * Get Galley by ID
+ * Get Gallery by ID
  */
 var getGallery = function(req, res) {
   Gallery.model.findById(req.params.id).exec(function(err, item) {
