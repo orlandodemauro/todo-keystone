@@ -33,9 +33,9 @@ keystone.pre('routes', middleware.initErrorHandlers);
 exports = module.exports = function (app) {
 	
 	//app.get('/', routes.api.index);
-	
+	app.all('/user*', middleware.checkAuth)
 	app.use('/', keystone.middleware.api, require('./api'));
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
-	// app.get('/protected', middleware.requireUser, routes.views.protected);
+	// app.get('/protected', middleware.checkAuth, routes.views.protected);
 
 };

@@ -1,13 +1,13 @@
 var keystone = require('keystone');
 var router = require('express').Router();
 
-var Post = keystone.list('Post');
+var User = keystone.list('User');
 
 /**
- * List of Post models
+ * List of User models
  */
-var getAllPosts = function(req, res) {
-  Post.model.find(function(err, items) {
+var getAllUsers = function(req, res) {
+  User.model.find(function(err, items) {
 
     if (err) return res.err(err);
 
@@ -19,11 +19,11 @@ var getAllPosts = function(req, res) {
 }
 
 /**
- * Get Post by title
+ * Get User by email
  */
-var getPost = function(req, res) {
-  Post.model.findOne({
-    slug: req.params.post,
+var getUser = function(req, res) {
+  User.model.findOne({
+    key: req.params.user,
   }).exec(function(err, item) {
 
     if (err) return res.err(err);
@@ -37,38 +37,38 @@ var getPost = function(req, res) {
 }
 
 /**
- * Create a Post
+ * Create a User
  */
-var addPost = function(req, res) {
+var addUser = function(req, res) {
 
-  var item = new Post.model();
+  var item = new User.model();
 
-  Post.updateItem(item, req.body, function (err) {
+  User.updateItem(item, req.body, function (err) {
     if (err) return res.err(err);
         res.json({
-            data: Post.getData(item)
+            data: User.getData(item)
         });
     });
 }
 
 /**
- * Update Post by Title
+ * Update User by ID
  */
-var updatePost = function(req, res) {
+var updateUser = function(req, res) {
 
-  Post.model.findOne({
-    slug: req.params.post,
+  User.model.findOne({
+    key: req.params.user,
   }).exec(function(err, item) {
 
     if (err) return res.err(err);
     if (!item) return res.notfound();
 
-    Post.updateItem(item, req.body, function (err) {
+    User.updateItem(item, req.body, function (err) {
 
       if (err) return res.err(err);
 
       res.json({
-        data: Post.getData(item)
+        data: User.getData(item)
       });
 
     });
@@ -77,11 +77,11 @@ var updatePost = function(req, res) {
 }
 
 /**
- * Delete Post by ID
+ * Delete User by ID
  */
-var removePost = function(req, res) {
-  Post.model.findOne({
-    slug: req.params.post,
+var removeUser = function(req, res) {
+  User.model.findOne({
+    key: req.params.user,
   }).exec(function (err, item) {
 
     if (err) return res.err(err);
@@ -100,12 +100,12 @@ var removePost = function(req, res) {
 
 
 router.route('/')
-.get(getAllPosts)
-.post(addPost);
+.get(getAllUsers)
+.post(addUser);
 
-router.route('/:post')
-.get(getPost)
-.put(updatePost)
-.delete(removePost);
+router.route('/:user')
+.get(getUser)
+.put(updateUser)
+.delete(removeUser);
 
 module.exports = router;
